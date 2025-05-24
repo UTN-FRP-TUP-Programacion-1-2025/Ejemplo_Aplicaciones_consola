@@ -1,49 +1,51 @@
-﻿using Ejemplo1_Promedio_ClaseServicio.Models;
+﻿using Ejemplo2.Models;
 using System;
 
-
-namespace Ejemplo2_Promedio_ClaseServicio
+namespace Ejemplo2
 {
     internal class Program
     {
         static Servicio servicio = new Servicio();
 
-        #region métodos para la vista
-        static void MostrarVistaMenu()
+        #region métodos de impresión de pantallas
+        /*
+           relacionados con las impresiones en pantalla y capturas de datos de la entrada del usuario
+        */
+        static int MostrarPantallaMenuYSolicitarOpcion()
         {
             Console.Clear();
 
-
             Console.WriteLine(" \t\t Cálculo de promedio de notas\n\n");
-
 
             Console.WriteLine("\t1-  Ingrese la nota de un alumno");
             Console.WriteLine("\t2-  Mostrar promedio de las notas cargadas");
             Console.WriteLine("\tOtro-  Cerrar");
+
+            int op = Convert.ToInt32(Console.ReadLine());
+            return op;
         }
 
-        static void MostrarVistaSolicitudNota()
+        /*  */
+        static void MostrarPantallaSolicitudNota()
         {
             Console.Clear();
             Console.WriteLine(" \t\t Solicitud de ingreso de nueva nota\n\n");
 
-
             Console.WriteLine(" Ingrese a continuación la nota");
             double nota = Convert.ToDouble(Console.ReadLine());
 
-
             servicio.RegistrarNota(nota);
-
 
             Console.WriteLine("Presione una tecla para volver al menú principal");
             Console.ReadKey();
         }
 
-        static void MostrarVistaConsultaPromedio()
+        /*
+        */
+        static void MostrarPantallaConsultaPromedio()
         {
             Console.Clear();
             Console.WriteLine(" \t\t Consulta del promedio general\n\n");
-
 
             double promedio = servicio.CalcularPromedio();
             Console.WriteLine(" El promedio resultante es: {0:f2}", promedio);
@@ -55,44 +57,38 @@ namespace Ejemplo2_Promedio_ClaseServicio
 
         static void Main(string[] args)
         {
-            int op = 0;
+            int op = MostrarPantallaMenuYSolicitarOpcion();
 
-            MostrarVistaMenu();
-            op = Convert.ToInt32(Console.ReadLine());
-
-
-            while (op != 0)
+            while (op != -1)
             {
                 switch (op)
                 {
                     case 1:
                         {
-                            MostrarVistaSolicitudNota();
+                            MostrarPantallaSolicitudNota();
                         }
                         break;
                     case 2:
                         {
-                            MostrarVistaConsultaPromedio();
+                            MostrarPantallaConsultaPromedio();
                         }
                         break;
                     default:
                         {
-                            op = 0;
+                            op = -1;
                         }
                         break;
                 }
 
 
-                if (op != 0)
+                if (op != -1)
                 {
-                    MostrarVistaMenu();
-                    op = Convert.ToInt32(Console.ReadLine());
+                    op = MostrarPantallaMenuYSolicitarOpcion();
                 }
             }
 
             Console.WriteLine("Presione una tecla para salir");
             Console.ReadKey();
-
         }
     }
 }

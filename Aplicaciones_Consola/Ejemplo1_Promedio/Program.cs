@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ejemplo1_Promedio
 {
@@ -29,12 +25,18 @@ namespace Ejemplo1_Promedio
         }
         #endregion
 
+
         #region métodos para la vista
         /*
-        relacionados con las impresiones en pantalla y capturas de datos de la entrada del usuario
+         relacionados con las impresiones en pantalla y capturas
+         de datos de la entrada del usuario
         */
 
-        static void MostrarVistaMenu()
+
+        /*
+         * */
+
+        static int MostrarPantallaMenuYSolicitarOpcion()
         {
             Console.Clear();
 
@@ -45,9 +47,14 @@ namespace Ejemplo1_Promedio
             Console.WriteLine("\t1-  Ingrese la nota de un alumno");
             Console.WriteLine("\t2-  Mostrar promedio de las notas cargadas");
             Console.WriteLine("\tOtro-  Cerrar");
-        }
 
-        static void MostrarVistaSolicitudNota()
+
+            int op = Convert.ToInt32(Console.ReadLine());
+            return op;
+        }
+        /*
+        */
+        static void MostrarPantallaSolicitudNota()
         {
             Console.Clear();
             Console.WriteLine(" \t\t Solicitud de ingreso de nueva nota\n\n");
@@ -64,7 +71,13 @@ namespace Ejemplo1_Promedio
             Console.ReadKey();
         }
 
-        static void MostrarVistaConsultaPromedio()
+
+
+
+        /**/
+
+
+        static void MostrarPantallaConsultaPromedio()
         {
             Console.Clear();
             Console.WriteLine(" \t\t Consulta del promedio general\n\n");
@@ -79,47 +92,42 @@ namespace Ejemplo1_Promedio
 
 
         #endregion
-
         static void Main(string[] args)
         {
-            int op = 0;
-
-            MostrarVistaMenu();
-            op = Convert.ToInt32(Console.ReadLine());
+            int op = MostrarPantallaMenuYSolicitarOpcion();
 
 
-            while (op != 0)
+            while (op != -1)
             {
                 switch (op)
                 {
                     case 1:
                         {
-                            MostrarVistaSolicitudNota();
+                            MostrarPantallaSolicitudNota();
                         }
                         break;
                     case 2:
                         {
-                            MostrarVistaConsultaPromedio();
+                            MostrarPantallaConsultaPromedio();
                         }
                         break;
                     default:
                         {
-                            op = 0;
+                            op = -1;
                         }
                         break;
                 }
 
 
-                if (op != 0)
+                if (op != -1)
                 {
-                    MostrarVistaMenu();
-                    op = Convert.ToInt32(Console.ReadLine());
+                    op = MostrarPantallaMenuYSolicitarOpcion();
                 }
             }
 
             Console.WriteLine("Presione una tecla para salir");
             Console.ReadKey();
-
         }
+
     }
 }

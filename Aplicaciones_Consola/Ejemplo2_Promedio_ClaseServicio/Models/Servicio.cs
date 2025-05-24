@@ -1,4 +1,4 @@
-﻿namespace Ejemplo1_Promedio_ClaseServicio.Models
+﻿namespace Ejemplo2.Models
 {
     internal class Servicio
     {
