@@ -1,101 +1,62 @@
-﻿using System;
+﻿using Ejemplo2.Models;
 
-namespace Ejemplo1_Promedio
+namespace Ejemplo2
 {
     internal class Program
     {
-        #region variables y  métodos del dominio del problema
-        static double acum;
-        static int contador;
+        static Servicio servicio = new Servicio();
 
-
-        static double CalcularPromedio()
-        {
-            double promedio = 0;
-            if (contador > 0)
-                promedio = acum / contador;
-            return promedio;
-        }
-
-
-        static void RegistrarNota(double nota)
-        {
-            acum += nota;
-            contador++;
-        }
-        #endregion
-
-
-        #region métodos para la vista
+        #region métodos de impresión de pantallas
         /*
-         relacionados con las impresiones en pantalla y capturas
-         de datos de la entrada del usuario
+           relacionados con las impresiones en pantalla y capturas de datos de la entrada del usuario
         */
-
-
-        /*
-         * */
-
         static int MostrarPantallaMenuYSolicitarOpcion()
         {
             Console.Clear();
 
-
             Console.WriteLine(" \t\t Cálculo de promedio de notas\n\n");
-
 
             Console.WriteLine("\t1-  Ingrese la nota de un alumno");
             Console.WriteLine("\t2-  Mostrar promedio de las notas cargadas");
             Console.WriteLine("\tOtro-  Cerrar");
 
-
             int op = Convert.ToInt32(Console.ReadLine());
             return op;
         }
-        /*
-        */
+
+        /*  */
         static void MostrarPantallaSolicitudNota()
         {
             Console.Clear();
             Console.WriteLine(" \t\t Solicitud de ingreso de nueva nota\n\n");
 
-
             Console.WriteLine(" Ingrese a continuación la nota");
             double nota = Convert.ToDouble(Console.ReadLine());
 
-
-            RegistrarNota(nota);
-
+            servicio.RegistrarNota(nota);
 
             Console.WriteLine("Presione una tecla para volver al menú principal");
             Console.ReadKey();
         }
 
-
-
-
-        /**/
-
-
+        /*
+        */
         static void MostrarPantallaConsultaPromedio()
         {
             Console.Clear();
             Console.WriteLine(" \t\t Consulta del promedio general\n\n");
 
-
-            double promedio = CalcularPromedio();
+            double promedio = servicio.CalcularPromedio();
             Console.WriteLine(" El promedio resultante es: {0:f2}", promedio);
 
             Console.WriteLine("Presione una tecla para volver al menú principal");
             Console.ReadKey();
         }
-
-
         #endregion
+
         static void Main(string[] args)
         {
             int op = MostrarPantallaMenuYSolicitarOpcion();
-
 
             while (op != -1)
             {
@@ -124,10 +85,6 @@ namespace Ejemplo1_Promedio
                     op = MostrarPantallaMenuYSolicitarOpcion();
                 }
             }
-
-            Console.WriteLine("Presione una tecla para salir");
-            Console.ReadKey();
         }
-
     }
 }
